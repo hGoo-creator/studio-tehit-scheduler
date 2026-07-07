@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     if (action === 'getSettings') {
       try {
-        const response = await fetch(`${kvUrl}/get/tehit_settings`, {
+        const response = await fetch(`${kvUrl}/get/tehit_settings_data`, {
           headers: { Authorization: `Bearer ${kvToken}` }
         });
         const data = await response.json();
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
 
         // Auto initialize settings in database if empty
         if (needsInit) {
-          await fetch(`${kvUrl}/set/tehit_settings`, {
+          await fetch(`${kvUrl}/set/tehit_settings_data`, {
             method: 'POST',
             headers: { 
               Authorization: `Bearer ${kvToken}`, 
@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     } else {
       // getReservations
       try {
-        const response = await fetch(`${kvUrl}/get/tehit_reservations`, {
+        const response = await fetch(`${kvUrl}/get/tehit_reservations_data`, {
           headers: { Authorization: `Bearer ${kvToken}` }
         });
         const data = await response.json();
@@ -100,7 +100,7 @@ export default async function handler(req, res) {
         if (!settingsToSave.adminId) settingsToSave.adminId = "admin";
         if (!settingsToSave.adminPassword) settingsToSave.adminPassword = "project7672500197!";
 
-        const saveResponse = await fetch(`${kvUrl}/set/tehit_settings`, {
+        const saveResponse = await fetch(`${kvUrl}/set/tehit_settings_data`, {
           method: 'POST',
           headers: { 
             Authorization: `Bearer ${kvToken}`, 
@@ -141,7 +141,7 @@ export default async function handler(req, res) {
           validReservations.push(r);
         }
 
-        const saveResponse = await fetch(`${kvUrl}/set/tehit_reservations`, {
+        const saveResponse = await fetch(`${kvUrl}/set/tehit_reservations_data`, {
           method: 'POST',
           headers: { 
             Authorization: `Bearer ${kvToken}`, 
