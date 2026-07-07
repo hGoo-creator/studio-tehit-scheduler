@@ -22,16 +22,15 @@ export default async function handler(req, res) {
         });
         const data = await response.json();
         
-        // Initial Default Settings
+        // Initial Default Settings (Modified: 2F -> 호리존(지하2층), Remove priceAll)
         let settings = {
           adminId: "admin",
           adminPassword: "project7672500197!",
-          notice: "[studio_tehit 공지사항]\n- 최소 예약 시간은 2시간입니다.\n- 예약 신청 후 예약대기 상태가 되며, 관리자 안내에 따라 대관료 입금 시 예약 완료 처리됩니다.\n- 기준 인원: 1층/2층 단독 3명, 전체대관 5명 (추가 인원당 시간별 5,000원 추가)",
+          notice: "[studio_tehit 공지사항]\n- 최소 예약 시간은 2시간입니다.\n- 예약 신청 후 예약대기 상태가 되며, 관리자 안내에 따라 대관료 입금 시 예약 완료 처리됩니다.\n- 기준 인원: 1층 / 호리존(지하2층) 단독 3명 (추가 인원당 시간별 5,000원 추가)",
           inquiry: "https://instagram.com/studio_tehit",
           directions: "https://map.naver.com",
           price1f: 50000,
-          price2f: 50000,
-          priceAll: 90000,
+          price2f: 50000, // Used for 호리존(지하2층)
           priceExtra: 5000
         };
 
@@ -129,12 +128,12 @@ export default async function handler(req, res) {
             ex.start_date === r.start_date && 
             ex.id !== r.id && 
             Math.max(r.start_hour, ex.start_hour) < Math.min(r.end_hour, ex.end_hour) && 
-            (r.room === ex.room || r.room === '전체' || ex.room === '전체')
+            (r.room === ex.room) // overlap constraint simplified since '전체' is removed
           );
           
           if (overlap) {
             return res.status(400).json({ 
-              error: "중복된 대관 예약 시간이 존재합니다. (날짜: " + r.start_date + ", 층: " + r.room + ")",
+              error: "중복된 대관 예약 시간이 존재합니다. (날짜: " + r.start_date + ", 공간: " + r.room + ")",
               overlapDetails: r 
             });
           }

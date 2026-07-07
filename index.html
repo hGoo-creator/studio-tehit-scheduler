@@ -272,10 +272,9 @@
       opacity: 0.85;
     }
 
-    /* Badge Colors by Floor */
+    /* Badge Colors by Floor (Green for 1F, Blue for B2 Horizone) */
     .booking-badge.room-1f { border-left-color: #2E7D32; } /* Green */
-    .booking-badge.room-2f { border-left-color: #1565C0; } /* Blue */
-    .booking-badge.room-all { border-left-color: #E65100; } /* Orange */
+    .booking-badge.room-horizone { border-left-color: #1565C0; } /* Blue */
 
     /* Modals styling */
     .modal {
@@ -502,7 +501,7 @@
       </a>
       <a href="#" id="link-price" class="header-link-item" onclick="togglePriceCalculator(event)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-        견적 계산기
+        가격 안내
       </a>
       <a href="#" id="link-inquiry" class="header-link-item" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
@@ -510,7 +509,7 @@
       </a>
     </div>
     
-    <!-- Real-time Cost Calculator -->
+    <!-- Real-time Cost Calculator / Price Guide Panel -->
     <div id="price-calculator-section" class="price-calculator-section" style="display: none;">
       <h3 style="margin-bottom: 1.5rem; color: var(--text-brown); text-align: center; font-family: var(--font-title);">대관 비용 계산기</h3>
       
@@ -524,7 +523,7 @@
       </div>
       
       <div class="calc-row">
-        <div class="calc-label">2층 (<span id="calc-price-2f">0</span>원/시간)</div>
+        <div class="calc-label">호리존(지하2층) (<span id="calc-price-2f">0</span>원/시간)</div>
         <div class="calc-inputs">
           <select id="calc-start-2f" onchange="calculatePrice()"><option value="">시작</option></select> ~
           <select id="calc-end-2f" onchange="calculatePrice()"><option value="">종료</option></select>
@@ -532,17 +531,8 @@
         <div class="calc-amount" id="calc-amount-2f">0원</div>
       </div>
       
-      <div class="calc-row">
-        <div class="calc-label">전체대관 (<span id="calc-price-all">0</span>원/시간)</div>
-        <div class="calc-inputs">
-          <select id="calc-start-all" onchange="calculatePrice()"><option value="">시작</option></select> ~
-          <select id="calc-end-all" onchange="calculatePrice()"><option value="">종료</option></select>
-        </div>
-        <div class="calc-amount" id="calc-amount-all">0원</div>
-      </div>
-      
       <div class="calc-row" style="flex-wrap: nowrap; border-bottom: 1px solid #f0f0f0;">
-        <div class="calc-label" style="flex: 2; min-width: 180px;">총 인원 <span style="font-size:0.8rem; color:var(--text-muted);">(기본: 층 단독 3명 / 전체 5명)</span></div>
+        <div class="calc-label" style="flex: 2; min-width: 180px;">총 인원 <span style="font-size:0.8rem; color:var(--text-muted);">(기본: 층 단독 3명)</span></div>
         <div class="calc-inputs" style="justify-content: flex-end; flex: 1;">
           <input type="number" id="calc-guests" value="0" min="0" oninput="calculatePrice()" style="width: 80px; text-align: right;"> 명
         </div>
@@ -577,8 +567,7 @@
         <h2 id="calendar-title" style="margin:0;">2026.07</h2>
         <div class="legend-container" style="justify-content:center; margin:0; gap: 1rem;">
           <div class="legend-item" style="color:#2E7D32; font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:#2E7D32; border-radius:50%; margin-right:4px;"></span>1층</div>
-          <div class="legend-item" style="color:#1565C0; font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:#1565C0; border-radius:50%; margin-right:4px;"></span>2층</div>
-          <div class="legend-item" style="color:#E65100; font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:#E65100; border-radius:50%; margin-right:4px;"></span>전체</div>
+          <div class="legend-item" style="color:#1565C0; font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:#1565C0; border-radius:50%; margin-right:4px;"></span>호리존(지하2층)</div>
         </div>
       </div>
       <button onclick="nextMonth()">다음달 &gt;</button>
@@ -620,8 +609,7 @@
             <h2 id="admin-calendar-title" style="margin:0;">2026.07</h2>
             <div class="legend-container" style="justify-content:center; margin:0;">
               <div class="legend-item" style="color:#2E7D32; font-weight:600;">1층</div>
-              <div class="legend-item" style="color:#1565C0; font-weight:600;">2층</div>
-              <div class="legend-item" style="color:#E65100; font-weight:600;">전체</div>
+              <div class="legend-item" style="color:#1565C0; font-weight:600;">호리존(지하2층)</div>
             </div>
           </div>
           <button onclick="nextMonth()">다음달 &gt;</button>
@@ -652,15 +640,11 @@
             <input type="number" id="input-setting-price-1f" placeholder="예: 50000">
           </div>
           <div class="form-group">
-            <label>2층 단독 시간당 단가 (원)</label>
+            <label>호리존(지하2층) 단독 시간당 단가 (원)</label>
             <input type="number" id="input-setting-price-2f" placeholder="예: 50000">
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label>전체대관 시간당 단가 (원)</label>
-            <input type="number" id="input-setting-price-all" placeholder="예: 90000">
-          </div>
           <div class="form-group">
             <label>추가인원 시간당 단가 (원/명)</label>
             <input type="number" id="input-setting-price-extra" placeholder="예: 5000">
@@ -712,8 +696,7 @@
           <label>이용할 공간 (층) *</label>
           <select id="res-room" required onchange="calculateModalPrice()">
             <option value="1층">1층</option>
-            <option value="2층">2층</option>
-            <option value="전체">전체대관</option>
+            <option value="호리존(지하2층)">호리존(지하2층)</option>
           </select>
         </div>
         <div class="form-row">
@@ -846,7 +829,6 @@
       document.getElementById('input-setting-directions').value = appSettings.directions || '';
       document.getElementById('input-setting-price-1f').value = appSettings.price1f || '';
       document.getElementById('input-setting-price-2f').value = appSettings.price2f || '';
-      document.getElementById('input-setting-price-all').value = appSettings.priceAll || '';
       document.getElementById('input-setting-price-extra').value = appSettings.priceExtra || '';
     }
 
@@ -861,7 +843,6 @@
         directions: document.getElementById('input-setting-directions').value.trim(),
         price1f: parseInt(document.getElementById('input-setting-price-1f').value) || 0,
         price2f: parseInt(document.getElementById('input-setting-price-2f').value) || 0,
-        priceAll: parseInt(document.getElementById('input-setting-price-all').value) || 0,
         priceExtra: parseInt(document.getElementById('input-setting-price-extra').value) || 0
       };
       localStorage.setItem('tehit_admin_settings', JSON.stringify(appSettings));
@@ -929,11 +910,9 @@
       };
       populate('calc-start-1f'); populate('calc-end-1f');
       populate('calc-start-2f'); populate('calc-end-2f');
-      populate('calc-start-all'); populate('calc-end-all');
 
       document.getElementById('calc-price-1f').innerText = (appSettings.price1f || 0).toLocaleString();
       document.getElementById('calc-price-2f').innerText = (appSettings.price2f || 0).toLocaleString();
-      document.getElementById('calc-price-all').innerText = (appSettings.priceAll || 0).toLocaleString();
       document.getElementById('calc-price-extra').innerText = (appSettings.priceExtra || 0).toLocaleString();
       
       calculatePrice();
@@ -944,8 +923,6 @@
       document.getElementById('calc-end-1f').value = '';
       document.getElementById('calc-start-2f').value = '';
       document.getElementById('calc-end-2f').value = '';
-      document.getElementById('calc-start-all').value = '';
-      document.getElementById('calc-end-all').value = '';
       document.getElementById('calc-guests').value = '0';
       calculatePrice();
     }
@@ -953,15 +930,13 @@
     function calculatePrice() {
       const p1 = parseInt(appSettings.price1f) || 0;
       const p2 = parseInt(appSettings.price2f) || 0;
-      const pa = parseInt(appSettings.priceAll) || 0;
       const pex = parseInt(appSettings.priceExtra) || 0;
 
       const getVal = (id) => parseInt(document.getElementById(id).value);
       
-      let sum1 = 0, sum2 = 0, sumAll = 0;
-      let h1 = 0, h2 = 0, hAll = 0;
+      let sum1 = 0, sum2 = 0;
+      let h1 = 0, h2 = 0;
       let roomsActive = 0;
-      let isAllActive = false;
 
       const s1 = getVal('calc-start-1f'), e1 = getVal('calc-end-1f');
       if (!isNaN(s1) && !isNaN(e1) && e1 > s1) { h1 = e1 - s1; sum1 = h1 * p1; roomsActive++; }
@@ -969,27 +944,22 @@
       const s2 = getVal('calc-start-2f'), e2 = getVal('calc-end-2f');
       if (!isNaN(s2) && !isNaN(e2) && e2 > s2) { h2 = e2 - s2; sum2 = h2 * p2; roomsActive++; }
 
-      const sa = getVal('calc-start-all'), ea = getVal('calc-end-all');
-      if (!isNaN(sa) && !isNaN(ea) && ea > sa) { hAll = ea - sa; sumAll = hAll * pa; isAllActive = true; }
-
       document.getElementById('calc-amount-1f').innerText = sum1.toLocaleString() + '원';
       document.getElementById('calc-amount-2f').innerText = sum2.toLocaleString() + '원';
-      document.getElementById('calc-amount-all').innerText = sumAll.toLocaleString() + '원';
 
       let baseGuests = 0;
-      if (isAllActive) baseGuests = 5;
-      else if (roomsActive > 0) baseGuests = 3; 
+      if (roomsActive > 0) baseGuests = 3; 
       
       const guests = parseInt(document.getElementById('calc-guests').value) || 0;
       let extraGuests = Math.max(0, guests - baseGuests);
       
-      let totalHours = h1 + h2 + hAll;
+      let totalHours = h1 + h2;
       if (baseGuests === 0 || totalHours === 0) extraGuests = 0;
 
       const sumExtra = extraGuests * pex * totalHours;
       document.getElementById('calc-amount-extra').innerText = sumExtra.toLocaleString() + '원';
 
-      const total = sum1 + sum2 + sumAll + sumExtra;
+      const total = sum1 + sum2 + sumExtra;
       document.getElementById('calc-amount-total').innerText = total.toLocaleString() + '원';
     }
 
@@ -1008,7 +978,6 @@
         loadSettingsInputs();
         renderAdminCalendar();
       } else {
-        // Full security integration: clear any hint, just display a uniform login error
         alert("아이디 또는 비밀번호가 올바르지 않습니다.");
       }
     }
@@ -1084,7 +1053,7 @@
 
       dayRes.forEach(r => {
         const badge = document.createElement('div');
-        let roomClass = r.room === '1층' ? 'room-1f' : r.room === '2층' ? 'room-2f' : r.room === '전체' ? 'room-all' : '';
+        let roomClass = r.room === '1층' ? 'room-1f' : 'room-horizone';
         const statusClass = r.status === 'confirmed' ? 'confirmed' : 'pending';
         badge.className = `booking-badge ${roomClass} ${statusClass}`;
         
@@ -1183,10 +1152,9 @@
     function calculateModalPrice() {
       const room = document.getElementById('res-room').value;
       let pricePerHour = 0;
-      let baseGuests = 0;
-      if (room === '1층') { pricePerHour = parseInt(appSettings.price1f) || 0; baseGuests = 3; }
-      else if (room === '2층') { pricePerHour = parseInt(appSettings.price2f) || 0; baseGuests = 3; }
-      else if (room === '전체') { pricePerHour = parseInt(appSettings.priceAll) || 0; baseGuests = 5; }
+      let baseGuests = 3;
+      if (room === '1층') { pricePerHour = parseInt(appSettings.price1f) || 0; }
+      else if (room === '호리존(지하2층)') { pricePerHour = parseInt(appSettings.price2f) || 0; }
 
       const s = parseInt(document.getElementById('res-start-hour').value) || 0;
       const e = parseInt(document.getElementById('res-end-hour').value) || 0;
@@ -1226,7 +1194,7 @@
       // Client Side Double Overlap Check
       const overlap = reservations.find(ex => ex.start_date === r.start_date && ex.id != id && 
         Math.max(r.start_hour, ex.start_hour) < Math.min(r.end_hour, ex.end_hour) && 
-        (r.room === ex.room || r.room === '전체' || ex.room === '전체')
+        (r.room === ex.room)
       );
       if (overlap) {
         return alert('선택하신 대관 시간대에 이미 겹치는 예약이 존재합니다.');
@@ -1247,7 +1215,6 @@
         renderAll();
         alert(isViewModeAdmin ? '저장되었습니다.' : '예약 신청이 성공적으로 완료되었습니다. 관리자 확인 후 확정됩니다.');
       } catch (err) {
-        // Rollback local change if KV update fails
         if (!id) reservations.pop();
         else fetchData();
       }
