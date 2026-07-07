@@ -15,25 +15,18 @@
   
   <style>
     :root {
-      --bg-cream: #E5DFD9;
-      --text-brown: #4A3A2A;
-      --text-muted: #8E7E70;
-      --accent-gold: #C29B7F;
-      --card-bg: #FFFFFF;
-      --border-light: #E6E1DA;
-      
-      --pending-bg: #F6F1EA;
-      --pending-border: #D4C4B7;
-      --pending-text: #8E7E70;
-      
-      --confirmed-bg: #C29B7F;
-      --confirmed-border: #B28B6E;
-      --confirmed-text: #FFFFFF;
+      --bg-cream: #F4F2EE; /* Taupe Grey background */
+      --text-brown: #3A3026; /* Deep Espresso Brown font & titles */
+      --text-muted: #8E7E70; /* Soft muted brown */
+      --accent-gold: #70806E; /* Muted Sage Green (Active/Confirmed) */
+      --accent-amber: #C4A482; /* Soft Dusty Amber (Pending/Points) */
+      --card-bg: #FFFFFF; /* Off-White for cells and panels */
+      --border-light: #E3E0DA; /* Ash Grey border */
       
       --font-title: 'Playfair Display', serif;
       --font-body: 'Lato', sans-serif;
       --transition: all 0.3s ease;
-      --shadow: 0 4px 15px rgba(74, 58, 42, 0.05);
+      --shadow: 0 4px 15px rgba(58, 48, 38, 0.04);
     }
 
     * {
@@ -46,7 +39,7 @@
       background-color: var(--bg-cream);
       color: var(--text-brown);
       font-family: var(--font-body);
-      font-size: 19px; /* Enhanced font size for readability */
+      font-size: 19px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
@@ -57,10 +50,10 @@
       padding: 0 1.5rem 4rem;
     }
 
-    /* Admin Toggle */
+    /* Admin Toggle Button */
     .admin-link-wrapper {
       position: absolute;
-      top: 1rem;
+      top: 1.2rem;
       right: 1.5rem;
       z-index: 999;
     }
@@ -128,7 +121,7 @@
       display: none;
     }
 
-    /* Dynamic Notice Panel */
+    /* Notice Panel */
     #notice-box {
       margin: 1.5rem auto;
       max-width: 650px;
@@ -152,7 +145,7 @@
       display: block;
     }
 
-    /* Interactive Premium Calendar */
+    /* Premium Calendar Layout */
     .calendar-nav {
       display: flex;
       justify-content: space-between;
@@ -163,6 +156,7 @@
       font-size: 2rem;
       font-weight: 600;
       font-family: var(--font-title);
+      color: var(--text-brown);
     }
     .calendar-nav button {
       background: var(--card-bg);
@@ -184,13 +178,13 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 1px;
-      background-color: var(--border-light);
+      background-color: var(--border-light); /* Ash Grey Grid lines */
       border: 1px solid var(--border-light);
       border-radius: 8px;
       overflow: hidden;
       box-shadow: var(--shadow);
       margin-bottom: 3rem;
-      height: auto; /* Fits fluidly according to rows */
+      height: auto;
     }
     .day-header {
       background-color: var(--card-bg);
@@ -202,7 +196,7 @@
       border-bottom: 1px solid var(--border-light);
     }
     .day-cell {
-      background-color: var(--card-bg);
+      background-color: var(--card-bg); /* Clean Off-White cell */
       padding: 0.8rem;
       display: flex;
       flex-direction: column;
@@ -212,15 +206,14 @@
       min-height: 120px;
     }
     .day-cell:hover {
-      background-color: #FAF6F0;
+      background-color: #FAF9F6;
     }
     .day-cell.other-month {
-      background-color: #FCFAF7;
-      color: #D4C4B7;
+      background-color: #FAF9F7;
+      color: #C3BEB7;
     }
     .day-cell.today {
       border: 2px solid var(--accent-gold);
-      background-color: #FFF;
     }
     .day-number {
       font-weight: 700;
@@ -228,59 +221,38 @@
       margin-bottom: 0.3rem;
     }
 
-    /* Event Badges */
+    /* Left-aligned Event Badges */
     .booking-badge {
       font-size: 0.85rem;
       padding: 0.4rem 0.6rem;
       border-radius: 4px;
       cursor: pointer;
-      text-align: left; /* STRICT LEFT ALIGNMENT */
-      padding-left: 8px; /* LEFT PADDING FOR VISIBILITY */
+      text-align: left; /* STRICT LEFT ALIGN */
+      padding-left: 8px; /* LEFT PADDING */
       overflow: hidden;
       display: block;
       font-family: var(--font-body);
-      background: #FAF5EF;
-      border-left: 3px solid var(--accent-gold);
+      border-left: 3.5px solid var(--accent-gold);
       white-space: nowrap;
       text-overflow: ellipsis;
       transition: var(--transition);
     }
-    .booking-badge:hover {
-      filter: brightness(0.95);
-    }
-    .badge-line-1, .badge-line-2 {
-      display: block;
-      line-height: 1.3;
-    }
-    .badge-line-1 {
-      font-weight: 700;
-    }
-    .badge-line-2 {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Booking Status Styling */
     .booking-badge.confirmed {
-      border-left-color: var(--accent-gold);
-      background-color: #F3ECE5;
+      border-left-color: var(--accent-gold); /* Sage Green */
+      background-color: #ECEFEB;
+      color: var(--text-brown);
     }
     .booking-badge.pending {
-      border-left-style: dashed;
-      border-left-color: var(--text-muted);
-      background-color: #F8F7F5;
-      opacity: 0.85;
+      border-left-color: var(--accent-amber); /* Dusty Amber */
+      background-color: #F8F5EE;
+      color: var(--text-brown);
     }
-
-    /* Badge Colors by Floor (Green for 1F, Blue for B2 Horizone) */
-    .booking-badge.room-1f { border-left-color: #2E7D32; } /* Green */
-    .booking-badge.room-horizone { border-left-color: #1565C0; } /* Blue */
 
     /* Modals styling */
     .modal {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(74, 58, 42, 0.4);
+      background: rgba(58, 48, 38, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -300,7 +272,7 @@
       border-radius: 12px;
       width: 100%;
       max-width: 580px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 45px rgba(58,48,38,0.1);
       position: relative;
       max-height: 90vh;
       overflow-y: auto;
@@ -366,7 +338,7 @@
       font-weight: 700;
       text-align: center;
       border: 1px solid var(--accent-gold);
-      background-color: var(--accent-gold);
+      background-color: var(--accent-gold); /* Muted Sage Green */
       color: var(--card-bg);
       border-radius: 4px;
       cursor: pointer;
@@ -375,8 +347,8 @@
       font-family: var(--font-body);
     }
     .btn:hover {
-      background-color: #A37F65;
-      border-color: #A37F65;
+      background-color: #5D6D5C;
+      border-color: #5D6D5C;
     }
 
     /* Admin specific */
@@ -404,14 +376,14 @@
       padding: 2rem;
       max-width: 600px;
       margin: 2rem auto 1.5rem auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(58,48,38,0.03);
     }
     .calc-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0.9rem 0;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid #FAF8F5;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
@@ -472,6 +444,29 @@
     @media (max-width: 768px) {
       body { font-size: 17px; }
       h1 { font-size: 2.8rem; }
+      
+      /* Mobile Button / Elements Size Adjustments */
+      .admin-link {
+        font-size: 0.8rem !important;
+        padding: 0.35rem 0.75rem !important;
+      }
+      .admin-link-wrapper {
+        top: 0.8rem;
+        right: 1rem;
+      }
+      #notice-box {
+        margin: 1rem auto !important;
+        padding: 1rem 1.3rem !important;
+        font-size: 0.85rem !important;
+      }
+      .calendar-nav button {
+        padding: 0.4rem 0.85rem !important;
+        font-size: 0.85rem !important;
+      }
+      .calendar-nav h2 {
+        font-size: 1.6rem !important;
+      }
+      
       .header-links-bar { gap: 1rem; flex-direction: column; align-items: center; }
       .header-link-item { font-size: 1.05rem; }
       .day-cell { min-height: 95px; padding: 0.4rem; }
@@ -509,7 +504,7 @@
       </a>
     </div>
     
-    <!-- Real-time Cost Calculator / Price Guide Panel -->
+    <!-- Real-time Cost Calculator -->
     <div id="price-calculator-section" class="price-calculator-section" style="display: none;">
       <h3 style="margin-bottom: 1.5rem; color: var(--text-brown); text-align: center; font-family: var(--font-title);">대관 비용 계산기</h3>
       
@@ -531,7 +526,7 @@
         <div class="calc-amount" id="calc-amount-2f">0원</div>
       </div>
       
-      <div class="calc-row" style="flex-wrap: nowrap; border-bottom: 1px solid #f0f0f0;">
+      <div class="calc-row" style="flex-wrap: nowrap; border-bottom: 1px solid #FAF8F5;">
         <div class="calc-label" style="flex: 2; min-width: 180px;">총 인원 <span style="font-size:0.8rem; color:var(--text-muted);">(기본: 층 단독 3명)</span></div>
         <div class="calc-inputs" style="justify-content: flex-end; flex: 1;">
           <input type="number" id="calc-guests" value="0" min="0" oninput="calculatePrice()" style="width: 80px; text-align: right;"> 명
@@ -566,8 +561,8 @@
       <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
         <h2 id="calendar-title" style="margin:0;">2026.07</h2>
         <div class="legend-container" style="justify-content:center; margin:0; gap: 1rem;">
-          <div class="legend-item" style="color:#2E7D32; font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:#2E7D32; border-radius:50%; margin-right:4px;"></span>1층</div>
-          <div class="legend-item" style="color:#1565C0; font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:#1565C0; border-radius:50%; margin-right:4px;"></span>호리존(지하2층)</div>
+          <div class="legend-item" style="color:var(--accent-gold); font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:var(--accent-gold); border-radius:50%; margin-right:4px;"></span>1층</div>
+          <div class="legend-item" style="color:var(--accent-amber); font-weight:600;"><span style="display:inline-block; width:10px; height:10px; background:var(--accent-amber); border-radius:50%; margin-right:4px;"></span>호리존(지하2층)</div>
         </div>
       </div>
       <button onclick="nextMonth()">다음달 &gt;</button>
@@ -599,7 +594,7 @@
     <div id="admin-operations" style="display: none;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
         <h2 style="font-family: var(--font-title); font-size: 2rem;">관리자 모드</h2>
-        <button onclick="handleAdminLogout()" class="btn" style="width: auto; padding: 0.6rem 1.2rem; background: var(--card-bg); color: var(--text-brown); border-color: var(--border-light);">로그아웃</button>
+        <button onclick="handleAdminLogout()" class="btn" style="width: auto; padding: 0.6rem 1.2rem; background: var(--card-bg); color: var(--text-brown); border-color: var(--border-light); font-size:0.9rem;">로그아웃</button>
       </div>
 
       <div class="admin-panel">
@@ -608,8 +603,8 @@
           <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
             <h2 id="admin-calendar-title" style="margin:0;">2026.07</h2>
             <div class="legend-container" style="justify-content:center; margin:0;">
-              <div class="legend-item" style="color:#2E7D32; font-weight:600;">1층</div>
-              <div class="legend-item" style="color:#1565C0; font-weight:600;">호리존(지하2층)</div>
+              <div class="legend-item" style="color:var(--accent-gold); font-weight:600;">1층</div>
+              <div class="legend-item" style="color:var(--accent-amber); font-weight:600;">호리존(지하2층)</div>
             </div>
           </div>
           <button onclick="nextMonth()">다음달 &gt;</button>
@@ -661,7 +656,7 @@
     </div>
   </div>
 
-  <!-- Unified Registration Modal (Popup) -->
+  <!-- Unified Registration Modal -->
   <div class="modal" id="reg-modal" onclick="closeModal(event, 'reg-modal')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -728,7 +723,7 @@
     </div>
   </div>
 
-  <!-- Detail Info Modal (Visitor View Only) -->
+  <!-- Detail Info Modal -->
   <div class="modal" id="detail-modal" onclick="closeModal(event, 'detail-modal')">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
@@ -1075,6 +1070,7 @@
     function renderCalendar() { renderGrid('calendar-grid', false); }
     function renderAdminCalendar() { renderGrid('admin-calendar-grid', true); }
 
+    // Init values
     function initHours() {
       const sh = document.getElementById('res-start-hour');
       sh.innerHTML = '';
@@ -1191,7 +1187,7 @@
         return alert("종료 시간은 시작 시간보다 늦어야 합니다.");
       }
 
-      // Client Side Double Overlap Check
+      // Overlap Check
       const overlap = reservations.find(ex => ex.start_date === r.start_date && ex.id != id && 
         Math.max(r.start_hour, ex.start_hour) < Math.min(r.end_hour, ex.end_hour) && 
         (r.room === ex.room)
@@ -1238,7 +1234,7 @@
     function openDetailModal(r) {
       document.getElementById('modal-room-title').innerText = `[${r.room}] 대관 현황`;
       document.getElementById('modal-status').innerText = r.status === 'confirmed' ? '예약완료' : '예약대기';
-      document.getElementById('modal-status').style.color = r.status === 'confirmed' ? 'var(--confirmed-bg)' : 'var(--pending-text)';
+      document.getElementById('modal-status').style.color = r.status === 'confirmed' ? 'var(--accent-gold)' : 'var(--accent-amber)';
       document.getElementById('modal-date').innerText = (r.start_date || '').substring(0, 10);
       document.getElementById('modal-time').innerText = `${r.start_hour}시 ~ ${r.end_hour}시`;
       document.getElementById('modal-name').innerText = maskName(r.name);
